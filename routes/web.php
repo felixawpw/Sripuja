@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function(){
 
 	Route::get('/home', 'HomeController@index')->name('home');
 
+
+	Route::post('/ajax/barang/load', 'BarangController@json')->name('barang_load');
 	Route::get('/ajax/add/supplier', 'AjaxController@addSupplier');
 	Route::post('/ajax/add/supplier', 'AjaxController@storeSupplier');
 

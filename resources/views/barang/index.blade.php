@@ -1,41 +1,89 @@
-@extends('master')
+@extends('layouts.master')
 
 @section('content')
-<h3>DAFTAR BARANG</h3>
-
-<!-- SEARCH FORM
-<form id="formSearch" class="form-inline">
-	<input type="text" name="search" id="search" placeholder="Search" class="form-control">
-	<input type="submit" name="submit" class="btn btn-primary" value="Submit" class="form-control">
-</form>
--->
-
-<div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
-	<div class="panel-body no-padding">
-		<table class="table table-striped" id="tablebarang" data-toggle="table" data-url="/barang/json" data-pagination="true" data-search="true" data-show-toggle="true" data-show-columns="true">
-			<thead>
-				<tr class="warning">
-					<th data-sortable="true" data-field="kode">Kode</th>
-					<th data-sortable="true" data-field="nama">Nama</th>
-					<th data-sortable="true" data-field="kodeharga">Kode Harga</th>
-					<th data-sortable="true" data-field="hbeli">H.Beli</th>
-					<th data-sortable="true" data-field="hjual">H.Jual</th>
-					<th data-sortable="true" data-field="stoktotal">Stok Total</th>
-					<th data-sortable="true" data-field="hgrosir">H.Grosir</th>
-					<th data-field="id" data-formatter="LinkFormatter">Action</th>
-				</tr>
-			</thead>
-		</table>
-	</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">assignment</i>
+          </div>
+          <h4 class="card-title">Data Barang</h4>
+        </div>
+        <div class="card-body">
+          <div class="toolbar">
+            <!--        Here you can write extra buttons/actions for the toolbar              -->
+          </div>
+          <div class="material-datatables">
+            <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+          	  <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Kode Barang</th>
+                  <th>Nama</th>
+                  <th>H.Beli</th>
+                  <th>H.Jual</th>
+                  <th>Stok</th>
+                  <th>Update Terakhir</th>
+                  <th class="disabled-sorting text-right">Actions</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+        <!-- end content-->
+      </div>
+      <!--  end card  -->
+    </div>
+    <!-- end col-md-12 -->
+  </div>
+  <!-- end row -->
 </div>
 
+@endsection
+
+@section('scripts')
 <script type="text/javascript">
-	function LinkFormatter(value, row, index) {
-		return "<a href='/barang/show/"+ value +"' class='btn btn-primary'>Show</a>";
-	}
+	$(document).ready(function(){
+		$('#nav_barang').addClass('active');
+		$('#barang_all').addClass('active');
+	});
+</script>
+
+<script>
 
 	$(document).ready(function(){
+		$('#datatables').DataTable({
+			"processing": true,
+			"serverSide": true,
+			"ajax":
+				{
+					"url": "{{ route('barang_load') }}",
+					"dataType": "json",
+					"type": "POST",
+					"data":{ _token: "{{csrf_token()}}"}
+				},
+			"columns": [
+			    { "data": "id" },
+			    { "data": "kode" },
+			    { "data": "nama" },
+			    { "data": "hbeli" },
+			    { "data": "hjual" },
+			    { "data": "stoktotal" },
+			    { "data": "updated_at" },
+			    { "data": "options" }
+			]	 
+		});
 
-	});
+	  var table = $('#datatables').DataTable();
+
+	  // Delete a record
+	  table.on('click', '.remove', function(e) {
+	    $tr = $(this).closest('tr');
+	    table.row($tr).remove().draw();
+	    e.preventDefault();
+	  });
+    });
 </script>
 @endsection

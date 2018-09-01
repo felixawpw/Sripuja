@@ -1,77 +1,95 @@
-@extends('master')
+@extends('layouts.master')
 
 @section('content')
-<h3>EDIT BARANG</h3>
-
-<div class="tab-content">
-    <div class="tab-pane active" id="horizontal-form">
-        <form class="form-horizontal" method="post" action="#">
-            {{csrf_field()}}
-            
-            <div class="form-group">
-                <label for="focusedinput" class="col-sm-2 control-label">Kode Barang</label>
-                
-                <div class="col-sm-8">
-                    <input required type="text" class="form-control1" id="focusedinput" placeholder="Kode Barang" name="kode" value="{{$barang->kode}}">
-                </div>
+<div class="container-fluid">
+	<div class="row">
+    	<div class="col-md-12">
+          <div class="card ">
+            <div class="card-header card-header-rose card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">contacts</i>
+              </div>
+              <h4 class="card-title">Tambah Barang</h4>
             </div>
-
-            <div class="form-group">
-                <label for="focusedinput" class="col-sm-2 control-label">Nama Barang</label>
-                
-                <div class="col-sm-8">
-                    <input required type="text" class="form-control1" id="focusedinput" placeholder="Nama Barang" name="nama" value="{{$barang->nama}}">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="focusedinput" class="col-sm-2 control-label">Kode Harga</label>
-                
-                <div class="col-sm-8">
-                    <input required type="text" class="form-control1" id="focusedinput" placeholder="Kode Harga" name="kodeharga" value="{{$barang->kodeharga}}">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="focusedinput" class="col-sm-2 control-label">Harga Beli</label>
-                
-                <div class="col-sm-8">
-                    <input required type="number" class="form-control1" id="focusedinput" placeholder="Harga Beli" name="hbeli" value="{{$barang->hbeli}}">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="focusedinput" class="col-sm-2 control-label">Harga Jual</label>
-                
-                <div class="col-sm-8">
-                    <input required type="number" class="form-control1" id="focusedinput" placeholder="Harga Jual" name="hjual" value="{{$barang->hjual}}">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="focusedinput" class="col-sm-2 control-label">Stok Total</label>
-                
-                <div class="col-sm-8">
-                    <input required type="number" class="form-control1" id="focusedinput" placeholder="Stok Total" name="stoktotal" value="{{$barang->stoktotal}}">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="focusedinput" class="col-sm-2 control-label">Harga Grosir</label>
-                
-                <div class="col-sm-8">
-                    <input required type="number" class="form-control1" id="focusedinput" placeholder="Harga Grosir" name="hgrosir" value="{{$barang->hgrosir}}">
-                </div>
-            </div>
-
-            <div class="panel-footer">
+            <div class="card-body ">
+              <form class="form-horizontal" action="{!! route('barang.update', $barang->id) !!}" method="POST">
+              	{{csrf_field()}}
+              	@method('PUT')
                 <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <button type="submit" class="btn-primary btn">Kirim</button>
+                  <label class="col-md-3 col-form-label">Kode Barang</label>
+                  <div class="col-md-9">
+                    <div class="form-group has-default">
+                      <input type="text" class="form-control" name="kode" value="{!! $barang->kode !!}">
                     </div>
+                  </div>
                 </div>
+                <div class="row">
+                  <label class="col-md-3 col-form-label">Nama Barang</label>
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="nama" value="{!! $barang->nama !!}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-md-3 col-form-label">Kode Harga</label>
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="kodeharga" value="{!! $barang->kodeharga !!}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-md-3 col-form-label">Harga Beli</label>
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <input type="number" class="form-control" name="hbeli" value="{!! $barang->hbeli !!}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-md-3 col-form-label">Harga Jual</label>
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <input type="number" class="form-control" name="hjual" value="{!! $barang->hjual !!}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-md-3 col-form-label">Stok Total</label>
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <input type="number" class="form-control" name="stoktotal" value="{!! $barang->stoktotal !!}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-md-3 col-form-label">Harga Grosir</label>
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <input type="number" class="form-control" name="hgrosir" value="{!! $barang->hgrosir !!}">
+                    </div>
+                  </div>
+                </div>
+				<div class="row">
+					<div class="col-md-12">
+						<button type="submit" class="btn btn-fill btn-rose form-control">Submit</button>
+					</div>
+				</div>
+              </form>
             </div>
-		</form>
+            <div class="card-footer ">
+            </div>
+          </div>
+        </div>
 	</div>
 </div>
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#nav_barang').addClass('active');
+	});
+</script>
 @endsection
