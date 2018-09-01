@@ -7,11 +7,93 @@ use Illuminate\Support\Facades\Input;
 use App\Barang;
 class BarangController extends Controller
 {
+<<<<<<< HEAD
     public function json()
     {
         $barangs = Barang::all();
         $barangs = ["asd", "fgh", "jkl", 'qwe', 'asd', 'zxc'];
         return $barangs;
+=======
+    public function json(Request $request)
+    {
+        $columns = array( 
+            0 =>'id', 
+            1 =>'kode',
+            2 => 'nama',
+            3 => 'hbeli',
+            4 => 'hjual',
+            5 => 'stoktotal',
+            6 => 'updated_at',
+            7 => 'options',
+        );
+  
+        $totalData = Barang::count();
+            
+        $totalFiltered = $totalData; 
+
+        $limit = $request->input('length');
+        $start = $request->input('start');
+
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+        
+        if(empty($request->input('search.value')))
+        {            
+            $barangs = Barang::offset($start)
+                         ->limit($limit)
+                         ->orderBy($order,$dir)
+                         ->get();
+        }
+        else {
+            $search = $request->input('search.value'); 
+
+            $barangs =  Barang::where('id','LIKE',"%{$search}%")
+                            ->orWhere('nama', 'LIKE',"%{$search}%")
+                            ->orWhere('kode', 'LIKE',"%{$search}%")
+                            ->offset($start)
+                            ->limit($limit)
+                            ->orderBy($order,$dir)
+                            ->get();
+
+            $totalFiltered = Barang::where('id','LIKE',"%{$search}%")
+                             ->orWhere('nama', 'LIKE',"%{$search}%")
+                             ->orWhere('kode', 'LIKE',"%{$search}%")
+                             ->count();
+        }
+
+        $data = array();
+        if(!empty($barangs))
+        {
+            foreach ($barangs as $b)
+            {
+                $show =  route('barang.show',$b->id);
+                $edit =  route('barang.edit',$b->id);
+                $delete = route('barang.destroy',$b->id);
+
+                $nestedData['id'] = $b->id;
+                $nestedData['kode'] = $b->kode;
+                $nestedData['nama'] = $b->nama;
+                $nestedData['hbeli'] = number_format($b->hbeli, 0, '.', '.');
+                $nestedData['hjual'] = number_format($b->hjual, 0, '.', '.');
+                $nestedData['stoktotal'] = number_format($b->stoktotal, 0, '.', '.');
+                $nestedData['updated_at'] = $b->updated_at == null ? "" : $b->updated_at->toDateTimeString();
+                $nestedData['options'] = 
+                "<a href='$show' class='btn btn-link btn-info btn-just-icon show'><i class='material-icons'>favorite</i></a>
+                <a href='$edit' class='btn btn-link btn-warning btn-just-icon edit'><i class='material-icons'>dvr</i></a>
+                <button type='submit' class='btn btn-link btn-danger btn-just-icon remove' onclick='delete_confirmation(event,\"$delete\" )'><i class='material-icons'>close</i></button>";
+                $data[] = $nestedData;
+            }
+        }
+          
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),  
+            "recordsTotal"    => intval($totalData),  
+            "recordsFiltered" => intval($totalFiltered), 
+            "data"            => $data   
+        );
+            
+        return json_encode($json_data);    
+>>>>>>> 89b1f447d154be4b9e1c19744a84d468801d0ac7
     }
 
     /**
@@ -119,6 +201,10 @@ class BarangController extends Controller
         //
         $barang = Barang::find($id);
         $barang->delete();
+<<<<<<< HEAD
         return redirect()->action('BarangController@index');
+=======
+        return 1;
+>>>>>>> 89b1f447d154be4b9e1c19744a84d468801d0ac7
     }
 }

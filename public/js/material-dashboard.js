@@ -1,10 +1,17 @@
 /*!
 
  =========================================================
+<<<<<<< HEAD
  * Material Dashboard PRO - v2.0.2
  =========================================================
 
  * Product Page: https://www.creative-tim.com/product/material-dashboard-pro
+=======
+ * Material Dashboard - v2.1.0
+ =========================================================
+
+ * Product Page: https://www.creative-tim.com/product/material-dashboard
+>>>>>>> 89b1f447d154be4b9e1c19744a84d468801d0ac7
  * Copyright 2018 Creative Tim (http://www.creative-tim.com)
 
  * Designed by www.invisionapp.com Coded by www.creative-tim.com
@@ -50,11 +57,19 @@ var seq2 = 0,
   durations2 = 500;
 
 $(document).ready(function() {
+<<<<<<< HEAD
   $sidebar = $('.sidebar');
   window_width = $(window).width();
 
   $('body').bootstrapMaterialDesign();
 
+=======
+
+  $('body').bootstrapMaterialDesign();
+
+  $sidebar = $('.sidebar');
+
+>>>>>>> 89b1f447d154be4b9e1c19744a84d468801d0ac7
   md.initSidebarsCheck();
 
   window_width = $(window).width();
@@ -62,6 +77,7 @@ $(document).ready(function() {
   // check if there is an image set for the sidebar's background
   md.checkSidebarImage();
 
+<<<<<<< HEAD
   md.initMinimizeSidebar();
 
   // Multilevel Dropdown menu
@@ -93,6 +109,9 @@ $(document).ready(function() {
 
 
   //   Activate bootstrap-select
+=======
+  //    Activate bootstrap-select
+>>>>>>> 89b1f447d154be4b9e1c19744a84d468801d0ac7
   if ($(".selectpicker").length != 0) {
     $(".selectpicker").selectpicker();
   }
@@ -100,6 +119,7 @@ $(document).ready(function() {
   //  Activate the tooltips
   $('[rel="tooltip"]').tooltip();
 
+<<<<<<< HEAD
   // Activate Popovers
   $('[data-toggle="popover"]').popover();
 
@@ -119,12 +139,15 @@ $(document).ready(function() {
     "optionClass": ""
   });
 
+=======
+>>>>>>> 89b1f447d154be4b9e1c19744a84d468801d0ac7
   $('.form-control').on("focus", function() {
     $(this).parent('.input-group').addClass("input-group-focus");
   }).on("blur", function() {
     $(this).parent(".input-group").removeClass("input-group-focus");
   });
 
+<<<<<<< HEAD
 
   if (breakCards == true) {
     // We break the cards headers if there is too much stress on them :-)
@@ -157,6 +180,8 @@ $(document).ready(function() {
     });
   }
 
+=======
+>>>>>>> 89b1f447d154be4b9e1c19744a84d468801d0ac7
   // remove class has-error for checkbox validation
   $('input[type="checkbox"][required="true"], input[type="radio"][required="true"]').on('click', function() {
     if ($(this).hasClass('error')) {
@@ -252,7 +277,11 @@ md = {
 
     $.notify({
       icon: "add_alert",
+<<<<<<< HEAD
       message: "Welcome to <b>Material Dashboard Pro</b> - a beautiful admin panel for every web developer."
+=======
+      message: "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer."
+>>>>>>> 89b1f447d154be4b9e1c19744a84d468801d0ac7
 
     }, {
       type: type[color],
@@ -264,6 +293,7 @@ md = {
     });
   },
 
+<<<<<<< HEAD
   initDocumentationCharts: function() {
     if ($('#dailySalesChart').length != 0 && $('#websiteViewsChart').length != 0) {
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
@@ -296,6 +326,8 @@ md = {
   },
 
 
+=======
+>>>>>>> 89b1f447d154be4b9e1c19744a84d468801d0ac7
   initFormExtendedDatetimepickers: function() {
     $('.datetimepicker').datetimepicker({
       icons: {
@@ -339,6 +371,10 @@ md = {
         today: 'fa fa-screenshot',
         clear: 'fa fa-trash',
         close: 'fa fa-remove'
+<<<<<<< HEAD
+=======
+
+>>>>>>> 89b1f447d154be4b9e1c19744a84d468801d0ac7
       }
     });
   },
@@ -606,6 +642,7 @@ md = {
     });
 
     seq2 = 0;
+<<<<<<< HEAD
   },
 
 
@@ -781,6 +818,8 @@ md = {
         }]
       },
     });
+=======
+>>>>>>> 89b1f447d154be4b9e1c19744a84d468801d0ac7
   }
 }
 
@@ -801,4 +840,8 @@ function debounce(func, wait, immediate) {
     }, wait);
     if (immediate && !timeout) func.apply(context, args);
   };
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 89b1f447d154be4b9e1c19744a84d468801d0ac7
